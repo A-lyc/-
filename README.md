@@ -38,3 +38,7 @@ element - npm i element-ui -S
 
 
 时间戳转换时间：new Date(parseInt(item.updated_at) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ').split(' ')[0]
+当前时间转换时间戳
+let timestamp = Date.parse(new Date())
+      //  当前时间的时间戳
+let time = timestamp.toString().substr(0, 10)
