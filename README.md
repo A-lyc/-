@@ -1,5 +1,4 @@
-# -
-Editor.vue：
+# -Editor.vue：
 具有富文本编辑器和点击上传图片进行裁切，需要element和quill以及vue-cropper组合完成
 ---
 需要全局安装
