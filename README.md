@@ -21,3 +21,5 @@ import { VueCropper } from "vue-cropper";
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
+
+接收内容 @change - <editor @change="contentEdit" ref="edit"></editor>
