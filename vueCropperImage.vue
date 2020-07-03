@@ -1,5 +1,5 @@
 <template>
-  <el-dialog :visible.sync="isShowCropper" top="5vh">
+<div>
     <VueCropper
       :autoCrop="option.autoCrop"
       :autoCropHeight="option.autoCropHeight"
@@ -17,8 +17,7 @@
     </VueCropper>
     <br/>
     <el-button @click="onCubeImg()" type="primary">生成图片</el-button>
-    <el-button @click="isShowCropper = false">取消</el-button>
-  </el-dialog>
+</div>
 </template>
 
 <script>
@@ -27,10 +26,6 @@
   export default {
     name: 'vueCropperImage',
     props:{
-      isShowCropper:{
-        type:Boolean,
-        default:false
-      },
       cropperPic:''
 
     },
@@ -48,8 +43,6 @@
           fixed: true,                    // 是否开启截图框宽高固定比例
           fixedNumber: [2, 1]             // 截图框的宽高比例
         },
-        isShowCropper: false,
-        isClient: true,
         width: '240px',
         height: '120px'
       }
@@ -74,7 +67,6 @@
           let blods = new File([u8arr], 'img.' + format, { type: 'image/' + format })
           let fromData = new FormData()
           fromData.append('file', blods)
-
           this.$notify({
             title: '成功',
             message: '正在上传中',
