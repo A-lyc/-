@@ -35,3 +35,6 @@ element - npm i element-ui -S
 <el-dialog :visible.sync="isShowCropper" top="5vh">
 <vue-cropper-image :cropper-pic="img" @uploadImage="uploadImage">
 </vue-cropper-image>
+
+
+时间戳转换时间：new Date(parseInt(item.updated_at) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ').split(' ')[0]
