@@ -23,3 +23,15 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 
 接收内容 @change - <editor @change="contentEdit" ref="edit"></editor>
+
+# -vueCropperImage.vue
+---
+安装：
+vue-cropper - npm install -d vue-cropper
+element - npm i element-ui -S
+
+同上导入方法
+父组件传入参数 img是图片地址  uploadImage返回图片地址
+<el-dialog :visible.sync="isShowCropper" top="5vh">
+<vue-cropper-image :cropper-pic="img" @uploadImage="uploadImage">
+</vue-cropper-image>
