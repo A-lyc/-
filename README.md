@@ -23,8 +23,8 @@ import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 
 多个的时候需要确定一个id
-
-接收内容 @change - <editor @change="contentEdit" ref="edit" id="sad"></editor>
+ - 问题，id需要传入之后提前渲染页面
+接收内容 @change - <editor @change="contentEdit" ref="edit" id="quill-input-all"></editor>
 
 # -vueCropperImage.vue
 ---
