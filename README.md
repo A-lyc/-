@@ -24,7 +24,7 @@ import "quill/dist/quill.bubble.css";
 
 多个的时候需要确定一个id
 
-接收内容 @change - <editor @change="contentEdit" ref="edit"></editor>
+接收内容 @change - <editor @change="contentEdit" ref="edit" id="sad"></editor>
 
 # -vueCropperImage.vue
 ---
