@@ -1,13 +1,13 @@
 # -Editor.vue：
 ---
-### 具有富文本编辑器和点击上传图片进行裁切，需要element和quill以及vue-cropper组合完成
+### 具有富文本编辑器和点击上传图片进行裁切，需要element和quill以及vue-cropper组合完成 - 写可以，读的话待完善
 
 需要全局安装
 element - npm i element-ui -S
 quill - npm install -d vue-quill-editor quill 
 vue-cropper - npm install -d vue-cropper
 
-### vue单独导入 - 可能出现dem和win问题 - 百度
+### vue单独导入 - 可能出现dom和win问题 - 百度
 import { quillEditor } from "vue-quill-editor";
 import { VueCropper } from "vue-cropper";
 
@@ -34,8 +34,8 @@ element - npm i element-ui -S
 
 同上导入方法
 父组件传入参数 img是图片地址  uploadImage返回图片地址
-<el-dialog :visible.sync="isShowCropper" top="5vh">
-<vue-cropper-image :cropper-pic="img" @uploadImage="uploadImage">
+<el-dialog :visible.sync="isShowCropper" top="5vh" v-if="isShowCropper">
+<vue-cropper-image :cropper-pic="img" @uploadImage="uploadImage" v-if="isShowCropper">
 </vue-cropper-image>
 
 
