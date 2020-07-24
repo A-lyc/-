@@ -2,6 +2,7 @@
   <div style="height: 500px">
     <!-- 图片上传组件-->
     <el-upload
+      id="quill-input-all"
       :before-upload="beforeUpload"
       :show-file-list="false"
       accept="image/*"
@@ -22,22 +23,23 @@
       v-model="content">
     </quill-editor>
     <!-- 图片裁剪组件-->
-    <el-dialog :visible.sync="isShowCropper" top="5vh">
-      <VueCropper
-        :autoCrop="option.autoCrop"
-        :autoCropHeight="option.autoCropHeight"
-        :autoCropWidth="option.autoCropWidth"
-        :canScale="option.canScale"
-        :fixed="option.fixed"
-        :fixedNumber="option.fixedNumber"
-        :img="option.img"
-        :info="option.info"
-        :outputSize="option.outputSize"
-        :outputType="option.outputType"
-        ref="cropper"
-        style="height:600px;margin:20px 0"
-      >
-      </VueCropper>
+    <el-dialog :visible.sync="isShowCropper" top="5vh" width="1260px"  :close-on-press-escape="false" :close-on-click-modal="false">
+        <VueCropper
+          :autoCrop="option.autoCrop"
+          :autoCropHeight="option.autoCropHeight"
+          :autoCropWidth="option.autoCropWidth"
+          :canScale="option.canScale"
+          :fixed="option.fixed"
+          :fixedNumber="option.fixedNumber"
+          :img="option.img"
+          :info="option.info"
+          :outputSize="option.outputSize"
+          :outputType="option.outputType"
+          ref="cropper"
+          :full="option.full"
+          style="height:600px;margin:20px 0;"
+        >
+        </VueCropper>
       <br/>
 
       <el-button @click="onCubeImg()" type="primary">生成图片</el-button>
@@ -49,19 +51,19 @@
   // 富文本工具栏配置
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'], // 加粗 斜体 下划线 删除线
-    ['blockquote', 'code-block'], // 引用  代码块
-    [{ header: 1 }, { header: 2 }], // 1、2 级标题
+    // ['blockquote', 'code-block'], // 引用  代码块
+    // [{ header: 1 }, { header: 2 }], // 1、2 级标题
     [{ list: 'ordered' }, { list: 'bullet' }], // 有序、无序列表
-    [{ script: 'sub' }, { script: 'super' }], // 上标/下标
+    // [{ script: 'sub' }, { script: 'super' }], // 上标/下标
     [{ indent: '-1' }, { indent: '+1' }], // 缩进
     // [{'direction': 'rtl'}],                         // 文本方向
     [{ size: ['small', false, 'large', 'huge'] }], // 字体大小
     [{ header: [1, 2, 3, 4, 5, 6, false] }], // 标题
     [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色
-    [{ font: [] }], // 字体种类
+    // [{ font: [] }], // 字体种类
     [{ align: [] }], // 对齐方式
     ['clean'], // 清除文本格式
-    ['link', 'image', 'video'] // 链接、图片、视频
+    ['image', 'video'] // 链接 - link、图片、视频
   ]
 
 
@@ -74,22 +76,24 @@
 
   export default {
     name: 'textEditor',
-    components: {},
     props: {
-      /*编辑器的内容*/
-      value: {
-        type: String
-      },
+
       /*图片大小*/
       maxSize: {
         type: Number,
-        default: 4000 //kb
+        default: 2000 //kb
+      },
+      /*编辑器的内容*/
+      aboutActive:{
+        type:String
       }
+
     },
     data() {
       return {
+        token:this.$store.state.access_token,
         // 富文本数据
-        content: '',
+        content: this.aboutActive,
         quillUpdateImg: false, // 根据图片上传状态来确定是否显示loading动画，刚开始是false,不显示
         editorOption: {
           theme: 'snow', // or 'bubble'
@@ -100,10 +104,10 @@
               // 和上传按钮进行绑定
               handlers: {
                 image: function(value) {
-                  console.log(value)
+                  //console.log(value)
                   if (value) {
                     // 触发input框选择图片文件
-                    document.querySelector('.avatar-uploader input').click()
+                    document.querySelector(`#quill-input-all input`).click()
                   } else {
                     this.quill.format('image', false)
                   }
@@ -122,13 +126,13 @@
           autoCrop: true,                  // 是否默认生成截图框
           autoCropWidth: 150,              // 默认生成截图框宽度
           autoCropHeight: 150,             // 默认生成截图框高度
-          fixed: true,                    // 是否开启截图框宽高固定比例
-          fixedNumber: [4, 4]             // 截图框的宽高比例
+          fixedNumber: [4, 4],             // 截图框的宽高比例
+          full:true                       //是否输出原图比例的截图
         },
         isShowCropper: false,
         isClient: true,
-        width: '150px',
-        height: '150px'
+        width: '300px',
+        height: '400px'
       }
     },
     methods: {
@@ -185,7 +189,7 @@
             type: 'success'
           });
           //发出网络请求
-          uImage(fromData).then(res => {
+          this.$api.uImage(fromData,this.token).then(res => {
             this.$notify({
               title: '成功',
               message: '图片上传成功',
@@ -193,6 +197,7 @@
             });
             // 获取富文本组件实例
             let quill = this.$refs.myQuillEditor.quill
+            //console.log(quill)
             if(res.code === 200){
               // 获取光标所在位置
               /**
@@ -209,7 +214,7 @@
               // 调整光标到最后
               quill.setSelection(length + 1)
             }else {
-              console.log(res.data.code)
+              //console.log(res.code)
               this.$notify({
                 title: '警告',
                 message: '图片上传失败',
@@ -223,15 +228,22 @@
         })
       },
       onEditorChange() {
-        console.log(this.content)
+        //console.log(this.content)
         //富文本内容改变事件 发送给父级元素 @change事件
         this.$emit('change', this.content)
       }
     },
     mounted() {
+      //console.log(this.aboutActive)
       setTimeout(() => {
         this.content = this.value
       }, 500)
+    },
+    created(){
+      setTimeout(() => {
+        this.content = this.aboutActive
+        //console.log(this.aboutActive)
+      }, 1000)
     }
   }
 </script>
