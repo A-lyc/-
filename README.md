@@ -44,3 +44,11 @@ element - npm i element-ui -S
 let timestamp = Date.parse(new Date())
       //  当前时间的时间戳
 let time = timestamp.toString().substr(0, 10)
+
+
+# map
+传输经纬度
+ <vue-map-bai-du :map-active="map"></vue-map-bai-du>
+ 
+ mapKey：接收地址，mapMessage：获取地理位置返回值
+ <vue-map-baidu-key :mapKey="ruleForm.address" @mapMessage="mapMessage" ></vue-map-baidu-key>
