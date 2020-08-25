@@ -26,11 +26,11 @@ import "quill/dist/quill.bubble.css";
  - 问题，id需要传入之后提前渲染页面
 接收内容 @change - <editor @change="contentEdit" ref="edit" id="quill-input-all"></editor>
 
-使用的时候会没有样式 - 决绝方案
+### 使用的时候会没有样式 - 决绝方案
 js导入样式
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-import 'quill/dist/quill.bubble.css'
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
 
 如果需要展示内容，要用一下方法包裹。
 <div class="ql-container ql-snow">
