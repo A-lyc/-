@@ -48,6 +48,7 @@
   </div>
 </template>
 <script>
+
   // 富文本工具栏配置
   const toolbarOptions = [
     ['bold', 'italic', 'underline', 'strike'], // 加粗 斜体 下划线 删除线
