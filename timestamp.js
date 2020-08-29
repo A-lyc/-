@@ -12,3 +12,4 @@ let tiem = timestamp.toString().substr(0, 10)
 module.exports =  {
   tiem
 }
+
