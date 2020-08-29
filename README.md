@@ -78,3 +78,6 @@ let time = timestamp.toString().substr(0, 10)
  //mapKey：接收地址，mapMessage：获取地理位置返回值
  <vue-map-baidu-key :mapKey="ruleForm.address" @mapMessage="mapMessage" ></vue-map-baidu-key>
  ```
+ 
+ ### randomStr - 生成随机字符串
+ ### timestamp - 到出时间戳
