@@ -81,3 +81,5 @@ let time = timestamp.toString().substr(0, 10)
  
  ### randomStr - 生成随机字符串
  ### timestamp - 到出时间戳
+
+### mapZhuan - 百度地图和腾讯地图互相转换
