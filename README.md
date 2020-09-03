@@ -83,3 +83,5 @@ let time = timestamp.toString().substr(0, 10)
  ### timestamp - 到出时间戳
 
 ### mapZhuan - 百度地图和腾讯地图互相转换
+
+### 富文本图片100%显示.replace(/\<img/gi, '<img style="width:100%;height:auto" ')
