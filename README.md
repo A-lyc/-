@@ -85,3 +85,15 @@ let time = timestamp.toString().substr(0, 10)
 ### mapZhuan - 百度地图和腾讯地图互相转换
 
 ### 富文本图片100%显示.replace(/\<img/gi, '<img style="width:100%;height:auto" ')
+
+
+
+### 小程序view和text换行问题
+```
+ view{
+        white-space:pre-line
+    }
+    text{
+        word-break:break-all;
+    }
+```
